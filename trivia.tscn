@@ -1,0 +1,147 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpa8wjkfc4ydm"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_trytk"]
+
+[sub_resource type="SystemFont" id="SystemFont_x0a4v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6rxj"]
+font = SubResource("SystemFont_x0a4v")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mwnda"]
+font_size = 18
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bvjrc"]
+line_spacing = 40.0
+font_size = 40
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_opyhi"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhp7n"]
+font_size = 28
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(572, 324)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -313.5
+offset_top = -279.0
+offset_right = 313.5
+offset_bottom = -39.0
+grow_horizontal = 2
+script = ExtResource("1_trytk")
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -125.0
+offset_top = 300.0
+offset_right = 225.0
+offset_bottom = 400.0
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 300.0
+offset_right = 750.0
+offset_bottom = 400.0
+
+[node name="Button3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -125.0
+offset_top = 425.0
+offset_right = 225.0
+offset_bottom = 525.0
+
+[node name="Button4" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 425.0
+offset_right = 750.0
+offset_bottom = 525.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -404.0
+offset_top = -7.0
+offset_right = 406.0
+offset_bottom = 219.0
+grow_horizontal = 2
+text = "Example question"
+label_settings = SubResource("LabelSettings_i6rxj")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="Control"]
+wait_time = 10.0
+autostart = true
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.397
+anchor_top = -0.13
+anchor_right = -0.397
+anchor_bottom = -0.13
+offset_left = -3.08099
+offset_top = -2.8
+offset_right = 171.919
+offset_bottom = 65.2
+text = "+2 if correct answer
+-1 if wrong answer"
+label_settings = SubResource("LabelSettings_mwnda")
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -257.0
+offset_top = 535.0
+offset_right = 895.0
+offset_bottom = 601.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 236.5
+offset_top = -50.0
+offset_right = 410.5
+offset_bottom = 45.0
+label_settings = SubResource("LabelSettings_bvjrc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 302.5
+offset_top = 557.0
+offset_right = 342.5
+offset_bottom = 602.0
+label_settings = SubResource("LabelSettings_opyhi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 702.0
+offset_top = -37.0
+offset_right = 887.0
+offset_bottom = 34.0
+label_settings = SubResource("LabelSettings_mhp7n")
+horizontal_alignment = 2
+
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/Button3" to="Control" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/Button4" to="Control" method="_on_button_4_pressed"]
+[connection signal="timeout" from="Control/Timer" to="Control" method="_on_timer_timeout"]
