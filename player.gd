@@ -8,6 +8,7 @@ var chatopen = false
 var trivia_instance
 var in_area = false
 
+var challenger_name
 
 
 func _enter_tree():
@@ -43,10 +44,14 @@ func _physics_process(delta):
 		$Camera2D.make_current()
 	if is_multiplayer_authority():
 		if Input.is_action_just_pressed("attack") and in_area:
+			$AnimatedSprite2D.play('Attack')
 			trivia_instance = trivia_scn.instantiate()
 			add_child(trivia_instance)
 			chatopen = true
-			trivia_instance.position = position
+			#trivia_instance.position = position
+			$Box/Label.text = challenger_name + " has been challenged"
+			$Box.visible = true
+			$Timer.start()
 	if trivia_instance != null:
 		if is_multiplayer_authority() and trivia_instance.get_node('Control').trivia_timeout:
 			$Box/Label.text = "My Score: "+str(trivia_instance.get_node('Control').score)
@@ -98,6 +103,7 @@ func _on_namelabel_text_submitted(new_text):
 
 func _on_area_2d_body_entered(body):
 	if(body.get_node('player_name') != null):
+		challenger_name = str(body.get_node('player_name').text)
 		in_area = true
 
 
