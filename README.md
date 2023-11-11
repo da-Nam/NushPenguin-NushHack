@@ -6,5 +6,5 @@ The multiplayer here is local peer-to-peer. It is up to the user to obtain the c
 
 Work Distribution Matrix:
 - Nam: mutiplayer, character and world logic
-- Edrik: slides
-- Matthias: trivia
+- Edrik: slides and character sprites.
+- Matthias: trivia,...
