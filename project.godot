@@ -13,7 +13,11 @@ config_version=5
 config/name="NushChan"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/nushchanguin.png"
+
+[autoload]
+
+AudioStreamPlayer2d="*res://audio_stream_player_2d.tscn"
 
 [input]
 

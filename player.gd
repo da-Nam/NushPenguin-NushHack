@@ -9,6 +9,7 @@ var trivia_instance
 var in_area = false
 
 var challenger_name
+var overall_score = 0
 
 
 func _enter_tree():
@@ -21,6 +22,7 @@ func _enter_tree():
 func _ready():
 	if is_multiplayer_authority():
 		$Namelabel.visible = true
+		$ScoreLabel.text = "score: " + str(overall_score)
 
 func _physics_process(delta):
 	#edalta = delta
@@ -35,7 +37,8 @@ func _physics_process(delta):
 			$AnimatedSprite2D.flip_h = true
 		if input_direction.y > 0:
 			$AnimatedSprite2D.play("nushc-downwards")
-			$AnimatedSprite2D.flip_h = false
+		if input_direction.y < 0:
+			$AnimatedSprite2D.play("nushc-up")
 		if input_direction == Vector2.ZERO:
 			$AnimatedSprite2D.stop()
 		if Input.is_action_pressed("exit"):
@@ -43,12 +46,11 @@ func _physics_process(delta):
 		move_and_slide()
 		$Camera2D.make_current()
 	if is_multiplayer_authority():
-		if Input.is_action_just_pressed("attack") and in_area:
+		if not chatopen and Input.is_action_just_pressed("attack") and in_area:
 			$AnimatedSprite2D.play('Attack')
 			trivia_instance = trivia_scn.instantiate()
 			add_child(trivia_instance)
 			chatopen = true
-			#trivia_instance.position = position
 			$Box/Label.text = challenger_name + " has been challenged"
 			$Box.visible = true
 			$Timer.start()
@@ -58,6 +60,8 @@ func _physics_process(delta):
 			$Box.visible = true
 			chatopen = false
 			$Timer.start()
+			overall_score += trivia_instance.get_node('Control').score
+			$ScoreLabel.text = "score: " + str(overall_score)
 			trivia_instance.queue_free()
 		
 func _input(event): 
@@ -83,12 +87,13 @@ func _on_timer_timeout():
 
 
 func _on_line_edit_text_submitted(new_text):
-	$Box/Label.text = new_text
-	$ChatBox.visible = false
-	$Box.visible = true
-	chatopen = false
-	$ChatBox/LineEdit.text = ""
-	$Timer.start()
+	if is_multiplayer_authority():
+		$Box/Label.text = new_text
+		$ChatBox.visible = false
+		$Box.visible = true
+		chatopen = false
+		$ChatBox/LineEdit.text = ""
+		$Timer.start()
 
 
 func _on_timer_timeout():
@@ -104,8 +109,8 @@ func _on_namelabel_text_submitted(new_text):
 func _on_area_2d_body_entered(body):
 	if(body.get_node('player_name') != null):
 		challenger_name = str(body.get_node('player_name').text)
+		print(challenger_name)
 		in_area = true
-
 
 func _on_area_2d_body_exited(body):
 	in_area = false

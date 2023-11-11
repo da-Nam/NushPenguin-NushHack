@@ -14,8 +14,6 @@ func _ready():
 	port = $ColorBack/VBoxContainer/portlabel.text.split(':')[1]
 
 
-func _process(delta):
-	pass
 
 func _on_host_pressed():
 	peer.create_server(int(port))

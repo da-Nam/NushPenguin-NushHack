@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://criphhq0yv58a"]
+[gd_scene load_steps=31 format=3 uid="uid://criphhq0yv58a"]
 
 [ext_resource type="Texture2D" uid="uid://bt6tajcxg7ekq" path="res://Assets/Basic Charakter Spritesheet.png" id="1_30ev0"]
 [ext_resource type="Script" path="res://player.gd" id="1_gbfve"]
@@ -8,11 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://c0l7583aiwbrw" path="res://Assets/Walking anim2.png" id="4_jcenl"]
 [ext_resource type="Texture2D" uid="uid://dku6r1nrehkiw" path="res://Assets/boxchat.png" id="7_atc84"]
 [ext_resource type="FontFile" uid="uid://h0bletdfwmwj" path="res://Assets/m3x6.ttf" id="8_rfle8"]
+[ext_resource type="Texture2D" uid="uid://cxebwcryhvrgu" path="res://Assets/Walking anim5.png" id="8_xalf4"]
 [ext_resource type="FontFile" uid="uid://brujrscme8bal" path="res://Assets/FutilePro.ttf" id="9_s8wrm"]
 [ext_resource type="PackedScene" uid="uid://bpa8wjkfc4ydm" path="res://trivia.tscn" id="10_tpgum"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fpdue"]
-radius = 22.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_af43y"]
+radius = 20.025
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iovdh"]
 atlas = ExtResource("1_30ev0")
@@ -110,6 +111,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("8_xalf4")
+}],
+"loop": true,
+"name": &"nushc-up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q486a")
 }, {
 "duration": 1.0,
@@ -176,6 +185,10 @@ properties/7/path = NodePath("player_name:visible")
 properties/7/spawn = true
 properties/7/sync = true
 properties/7/watch = false
+properties/8/path = NodePath("ScoreLabel:text")
+properties/8/spawn = true
+properties/8/sync = true
+properties/8/watch = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_23hrk"]
 line_spacing = 0.0
@@ -190,6 +203,11 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdqpw"]
 radius = 26.0192
 
+[sub_resource type="LabelSettings" id="LabelSettings_1ngyn"]
+font = ExtResource("9_s8wrm")
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="player" type="CharacterBody2D"]
 z_index = 3
 collision_layer = 2
@@ -197,14 +215,14 @@ script = ExtResource("1_gbfve")
 trivia_scn = ExtResource("10_tpgum")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 32)
-shape = SubResource("CircleShape2D_fpdue")
+position = Vector2(0, 30)
+shape = SubResource("CircleShape2D_af43y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_einre")
-animation = &"nushc-downwards"
+animation = &"nushc-up"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -768
@@ -218,29 +236,6 @@ wait_time = 5.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7scvo")
-
-[node name="ChatBox" type="Control" parent="."]
-z_index = 3
-layout_mode = 3
-anchors_preset = 0
-offset_left = -18.0
-offset_right = 22.0
-offset_bottom = 40.0
-
-[node name="LineEdit" type="LineEdit" parent="ChatBox"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -177.5
-offset_top = 143.5
-offset_right = 177.5
-offset_bottom = 174.5
-grow_horizontal = 2
-grow_vertical = 2
-placeholder_text = "Type your message..."
 
 [node name="Box" type="Sprite2D" parent="."]
 z_index = 3
@@ -275,24 +270,74 @@ label_settings = SubResource("LabelSettings_1e57h")
 horizontal_alignment = 1
 text_overrun_behavior = 1
 
-[node name="Namelabel" type="LineEdit" parent="."]
-visible = false
-offset_left = -98.0
-offset_top = -15.0
-offset_right = 100.0
-offset_bottom = 16.0
-placeholder_text = "Enter username"
-
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 31)
 shape = SubResource("CircleShape2D_bdqpw")
 
+[node name="Namelabel" type="LineEdit" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.0
+offset_top = -17.0
+offset_right = 94.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter username"
+
+[node name="ChatBox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -16.0
+offset_right = 25.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="ChatBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.5
+offset_top = 143.5
+offset_right = 177.5
+offset_bottom = 174.5
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Type your message..."
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = 62.0
+offset_right = 22.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Score:"
+label_settings = SubResource("LabelSettings_1ngyn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="text_submitted" from="ChatBox/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="text_submitted" from="Namelabel" to="." method="_on_namelabel_text_submitted"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="text_submitted" from="Namelabel" to="." method="_on_namelabel_text_submitted"]
+[connection signal="text_submitted" from="ChatBox/LineEdit" to="." method="_on_line_edit_text_submitted"]

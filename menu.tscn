@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://menu.gd" id="1_16w2m"]
 [ext_resource type="Texture2D" uid="uid://diy8lp1r784ej" path="res://Assets/RPGpack_sheet.png" id="1_d8kma"]
 [ext_resource type="PackedScene" uid="uid://criphhq0yv58a" path="res://player.tscn" id="2_a47sf"]
+[ext_resource type="FontFile" uid="uid://brujrscme8bal" path="res://Assets/FutilePro.ttf" id="4_0u6dr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1siad"]
 texture = ExtResource("1_d8kma")
@@ -746,11 +747,11 @@ terrain_set_0/terrain_0/name = "0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_1siad")
 
-[sub_resource type="SystemFont" id="SystemFont_bexsm"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_quodq"]
-font = SubResource("SystemFont_bexsm")
+font = ExtResource("4_0u6dr")
 font_size = 70
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -805,9 +806,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -225.5
-offset_top = -90.5
+offset_top = -128.5
 offset_right = 225.5
-offset_bottom = 90.5
+offset_bottom = 128.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
@@ -839,6 +840,10 @@ visible = false
 rotation = 1.26885
 energy = 0.09
 shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 22.0
+shadow_item_cull_mask = 7
 
 [connection signal="pressed" from="ColorBack/VBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="ColorBack/VBoxContainer/join" to="." method="_on_join_pressed"]

@@ -1,16 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpa8wjkfc4ydm"]
+[gd_scene load_steps=9 format=3 uid="uid://bpa8wjkfc4ydm"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_trytk"]
+[ext_resource type="FontFile" uid="uid://brujrscme8bal" path="res://Assets/FutilePro.ttf" id="2_qtvis"]
 
-[sub_resource type="SystemFont" id="SystemFont_obvnf"]
+[sub_resource type="Theme" id="Theme_r1gxi"]
+default_font = ExtResource("2_qtvis")
+default_font_size = 16
 
-[sub_resource type="LabelSettings" id="LabelSettings_i6rxj"]
-font = SubResource("SystemFont_obvnf")
+[sub_resource type="LabelSettings" id="LabelSettings_fmmq5"]
+font = ExtResource("2_qtvis")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_mwnda"]
 font_size = 18
-font_color = Color(1, 0, 0, 1)
+font_color = Color(1, 0, 0.0784314, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bvjrc"]
 line_spacing = 40.0
@@ -33,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_r1gxi")
 script = ExtResource("1_trytk")
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
@@ -42,65 +46,65 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.341176, 0.341176, 0.341176, 0.54902)
+color = Color(0.223529, 0.509804, 0.443137, 0.74902)
 
-[node name="Button" type="Button" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -457.0
-offset_top = -2.0
-offset_right = -107.0
-offset_bottom = 98.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Button2" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 132.0
-offset_top = 322.0
-offset_right = 482.0
-offset_bottom = 422.0
-
-[node name="Button3" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -462.0
-offset_top = 141.0
-offset_right = -112.0
-offset_bottom = 241.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Button4" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 132.0
-offset_top = 471.0
-offset_right = 482.0
-offset_bottom = 571.0
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -404.0
-offset_top = 49.0
-offset_right = 406.0
-offset_bottom = 275.0
+anchor_bottom = 0.5
+offset_left = -402.0
+offset_top = -119.5
+offset_right = 402.0
+offset_bottom = 119.5
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Example question"
-label_settings = SubResource("LabelSettings_i6rxj")
+label_settings = SubResource("LabelSettings_fmmq5")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qtvis")
+theme_override_font_sizes/font_size = 32
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qtvis")
+theme_override_font_sizes/font_size = 32
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qtvis")
+theme_override_font_sizes/font_size = 32
+
+[node name="Button4" type="Button" parent="Control/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qtvis")
+theme_override_font_sizes/font_size = 32
 
 [node name="Timer" type="Timer" parent="Control"]
 wait_time = 30.0
@@ -108,10 +112,10 @@ autostart = true
 
 [node name="Label2" type="Label" parent="Control"]
 layout_mode = 1
-offset_left = 3.0
-offset_top = 4.0
-offset_right = 178.0
-offset_bottom = 72.0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 181.0
+offset_bottom = 76.0
 text = "+2 if correct answer
 -1 if wrong answer"
 label_settings = SubResource("LabelSettings_mwnda")
@@ -161,14 +165,16 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -185.0
-offset_bottom = 71.0
+offset_left = -193.0
+offset_top = 9.0
+offset_right = -8.0
+offset_bottom = 80.0
 grow_horizontal = 0
 label_settings = SubResource("LabelSettings_mhp7n")
 horizontal_alignment = 2
 
-[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]
-[connection signal="pressed" from="Control/Button2" to="Control" method="_on_button_2_pressed"]
-[connection signal="pressed" from="Control/Button3" to="Control" method="_on_button_3_pressed"]
-[connection signal="pressed" from="Control/Button4" to="Control" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/Button" to="Control" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer/Button2" to="Control" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer2/Button3" to="Control" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/VBoxContainer2/Button4" to="Control" method="_on_button_4_pressed"]
 [connection signal="timeout" from="Control/Timer" to="Control" method="_on_timer_timeout"]

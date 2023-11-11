@@ -8,8 +8,11 @@ var timer: Timer
 var trivia_timeout = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	question_label = $Label
-	answer_buttons = [$Button, $Button2, $Button3, $Button4]
+	question_label = $VBoxContainer/Label
+	answer_buttons = [$VBoxContainer/HBoxContainer/VBoxContainer/Button, 
+	$VBoxContainer/HBoxContainer/VBoxContainer/Button2,
+	$VBoxContainer/HBoxContainer/VBoxContainer2/Button3,
+	 $VBoxContainer/HBoxContainer/VBoxContainer2/Button4]
 	$ColorRect2.visible = false
 	timer = $Timer
 	$Label3.visible = true
