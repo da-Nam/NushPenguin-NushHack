@@ -7,6 +7,6 @@ For other people on other systems, you should probably _download_ [godot version
 The multiplayer here is by LAN connections. It is up to the user to obtain the correct address and port and stuff for it to work. Considering that this is more of a proof of concept, it is recommended to run all the instances on *one device* for quick and easy testing. If you're using it to host a server on your own machine and want non-LAN clients to connect to it, you'll probably have to forward the server port on your router (haven't tried because school wifi lol).
 
 2. Work Distribution Matrix:
-- Nam: mutiplayer, character and world logic
+- Nam: mutiplayer and character/world logic
 - Edrik: slides and character sprites.
-- Matthias: trivia,...
+- Matthias: trivia and slides
